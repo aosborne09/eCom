@@ -7,7 +7,7 @@ from .forms import ContactForm
 # Create your views here.
 
 def contact_us(request):
-	form = ContactForm(request.POST or none)
+	form = ContactForm(request.POST or None)
 	if form.is_valid():
 		save_form = form.save(commit=False)
 		save_form.save()
