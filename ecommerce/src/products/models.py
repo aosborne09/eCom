@@ -14,6 +14,10 @@ class Product(models.Model):
 	def __unicode__(self):
 		return self.title
 
+	class Meta:
+		ordering = ['-title',]
+
+
 class ProductImage(models.Model):
 	product = models.ForeignKey(Product)
 	description = models.CharField(max_length=3000, null=True, blank=True)
@@ -22,4 +26,4 @@ class ProductImage(models.Model):
 	updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
 	def __unicode__(self):
-		return str(self.product.title) + " " + str(self.image)
+		return self.image

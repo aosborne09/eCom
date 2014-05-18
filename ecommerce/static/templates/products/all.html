@@ -2,17 +2,35 @@
 
 {% block jumbotron %}
 
-      <!-- Jumbotron -->
+<!-- Jumbotron -->
       <div class="jumbotron">
-        <h1>Products Arrived</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p>
+        <h1>WELCOME TO MY HOUSE</h1>
+        <p class="lead">Buy things. You'll like it.</p>
       </div>
 
-    {% endblock %}
+{% endblock %}
 
 {% block content %}
 
-{{ products }}
+      {% for product in products %}
+        {% cycle '<div class="row-fluid">' '' '' '' %}
+        <div class='col-md-4'>
+          
+          <h3><a href='{% url "products" %}{{ product.slug }}'>{{ product }}</a></h3>
+            {% for image in product.productimage_set.all %}
+              {% if forloop.first %}
+                <a href='{% url "products" %}{{ product.slug }}'><img src='{{ MEDIA_URL }}{{ image }}'/></a>
+                {% endif %}
+            {% endfor %}
+          </br>
+          {{ product.description }}
+          {{ product.price }}
+
+        </div>
+        {% cycle '' '' '' '</div>' %}
+        {% endfor %}
+
+
+
 
 {% endblock %}
